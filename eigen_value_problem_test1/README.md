@@ -1,3 +1,5 @@
+waveguide_modes_fenicsx1.py
+---------------------------------------------
 🎯 Overview of the Problem Setup
 📌 Target Structure:
 
@@ -70,3 +72,49 @@ Visualization	Displays the fundamental mode (lowest eigenvalue) using PyVista
     Determination of cutoff frequencies in shielded or optical waveguides
 
     Resonant mode analysis in RF structures or cavities
+
+    
+    waveguide_modes_fenicsx2.py
+    ------------------------------------------------
+    🧾 Description of the Simulation
+
+Title: Modal Analysis of a 2D Rectangular Waveguide with Anisotropic Permittivity Using FEniCSx and SLEPc
+
+Overview:
+This simulation solves the transverse electric (TE) mode eigenvalue problem in a 2D rectangular waveguide cross-section. The key feature of this model is the inclusion of anisotropic permittivity, meaning the dielectric properties differ between the x and y directions.
+
+Key Assumptions:
+
+    The waveguide is enclosed by perfect electric conductor (PEC) boundaries, enforcing Hz=0Hz​=0 on all edges.
+
+    Only the magnetic field component Hz(x,y)Hz​(x,y) is considered (transverse electric assumption).
+
+    The dielectric material exhibits anisotropy:
+    ε=[εxx00εyy]ε=[εxx​0​0εyy​​],
+    where εxx≠εyyεxx​=εyy​.
+
+Governing Equation (Weak Form):
+
+We solve the generalized eigenvalue problem:
+∫Ω(εxx∂Hz∂x∂v∂x+εyy∂Hz∂y∂v∂y) dΩ=kt2∫ΩHzv dΩ
+∫Ω​(εxx​∂x∂Hz​​∂x∂v​+εyy​∂y∂Hz​​∂y∂v​)dΩ=kt2​∫Ω​Hz​vdΩ
+
+where:
+
+    HzHz​ is the out-of-plane magnetic field,
+
+    kt2kt2​ is the transverse wavenumber squared (eigenvalue),
+
+    vv is the test function.
+
+Implementation:
+
+    The problem is discretized using second-order Lagrange elements (CG2CG2​) in FEniCSx.
+
+    Boundary conditions are enforced via Dirichlet constraints.
+
+    Eigenvalue computation is performed using SLEPc.
+
+Result:
+
+    The simulation outputs the lowest NN transverse electric modes and their respective eigenvalues kt2kt2​, providing insight into the modal characteristics of anisotropic dielectric waveguides.
